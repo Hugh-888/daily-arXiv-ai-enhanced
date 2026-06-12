@@ -909,7 +909,8 @@ function parseJsonlData(jsonlText, date) {
       
       let allCategories = Array.isArray(paper.categories) ? paper.categories : [paper.categories];
       
-      const primaryCategory = allCategories[0];
+      const subscribedCategories = ['quant-ph', 'gr-qc', 'physics.comp-ph', 'cs.LG'];
+      const primaryCategory = allCategories.find(c => subscribedCategories.includes(c)) || allCategories[0];
       
       if (!result[primaryCategory]) {
         result[primaryCategory] = [];
@@ -953,6 +954,12 @@ function getAllCategories(data) {
   
   return {
     sortedCategories: categories.sort((a, b) => {
+      const preferredOrder = ['quant-ph', 'gr-qc', 'physics.comp-ph', 'cs.LG'];
+      const ai = preferredOrder.indexOf(a);
+      const bi = preferredOrder.indexOf(b);
+      if (ai !== -1 && bi !== -1) return ai - bi;
+      if (ai !== -1) return -1;
+      if (bi !== -1) return 1;
       return a.localeCompare(b);
     }),
     categoryCounts: catePaperCount
