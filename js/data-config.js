@@ -12,7 +12,7 @@ const DATA_CONFIG = {
      * GitHub repository owner (username)
      * This will be replaced during GitHub Actions workflow execution
      */
-    repoOwner: 'dw-dengwei',
+    repoOwner: 'Hugh-888',
 
     /**
      * GitHub repository name
